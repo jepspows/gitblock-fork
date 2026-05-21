@@ -1,4 +1,4 @@
-# GitBlock — Decentralized AI Inference Network
+# GitBlock — Free AI Inference Network
 
 Free AI for everyone. Powered by the community.
 
@@ -6,79 +6,150 @@ Free AI for everyone. Powered by the community.
 
 GitBlock is a decentralized AI inference network where:
 - **Users** get free AI inference (Llama, Mistral, Gemma, 80+ models)
-- **Node operators** earn $GBLOCK tokens for serving models
-- **The community** governs the network through token voting
+- **Node operators** earn rewards for serving models
+- **The community** governs the network
 
-No paywalls. No API keys. No gatekeepers. Just open intelligence.
-
-## Features
-
-- ⚡ **Free AI Inference** — Access 80+ open-source models at zero cost
-- 🔗 **On-Chain Rewards** — Node operators earn tokens for serving quality inference
-- 🧠 **Open Source Models** — Llama, Mistral, Gemma, DeepSeek, Qwen and more
-- 🌍 **For Everyone** — No credit card, no signup, no limits for basic usage
-- 🔒 **Privacy First** — End-to-end encrypted inference, zero-knowledge verification
-- 🗳️ **Community Governed** — $GBLOCK holders vote on protocol decisions
+No paywalls. No credit cards. No gatekeepers. Just open intelligence.
 
 ## Quick Start
 
-### As a User
+### Install
+
 ```bash
-# Install CLI
 pip install gitblock
-
-# Ask a question
-gitblock ask "explain quantum computing"
-
-# Start a chat session
-gitblock chat
 ```
 
-### As a Node Operator
+### Get an API Key
+
+Connect your wallet at [gitblock.org](https://gitblock.org) to generate a free API key. No email, no signup.
+
+### Use the SDK
+
+```python
+from gitblock import GitBlock
+
+client = GitBlock(api_key="gb_free_xxx")
+
+response = client.chat(
+    model="llama-3.3-70b",
+    messages=[{"role": "user", "content": "Explain recursion"}]
+)
+print(response.choices[0].message.content)
+```
+
+### Use the CLI
+
 ```bash
-# Install node software
-pip install gitblock-node
+# One-shot question
+gitblock ask "What is machine learning?"
 
-# Register your node
-gitblock-node register
+# Interactive chat
+gitblock chat --model llama-3.3-70b
 
-# Start serving inference
-gitblock-node start --model llama-3.3-70b
+# List available models
+gitblock models
+
+# Set your API key
+gitblock auth --key gb_free_xxx
 ```
+
+### Streaming
+
+```python
+stream = client.chat_stream(
+    model="mistral-7b",
+    messages=[{"role": "user", "content": "Write a haiku about code"}]
+)
+for chunk in stream:
+    print(chunk.delta, end="", flush=True)
+```
+
+### REST API (any language)
+
+```bash
+curl -X POST https://api.gitblock.io/v1/chat/completions \
+  -H "Authorization: Bearer gb_free_xxx" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "llama-3.3-70b",
+    "messages": [{"role": "user", "content": "Hello!"}]
+  }'
+```
+
+## Run a Node
+
+Contribute GPU power and earn rewards.
+
+```bash
+pip install gitblock[node]
+
+# Configure
+gitblock-node --wallet 0xYourAddr --model llama-3.3-70b
+
+# Start serving
+python -m node
+```
+
+## Features
+
+- ⚡ **Free Inference** — 80+ open-source models at zero cost
+- 🔗 **OpenAI Compatible** — Same API format, swap the base URL
+- 🌐 **Multi-Language** — Python SDK, JavaScript SDK, REST API, CLI
+- 🔒 **Privacy First** — End-to-end encrypted, no logging
+- 🏗️ **Open Source** — MIT licensed, fork and deploy your own network
+
+## Available Models
+
+| Model | Size | Category |
+|-------|------|----------|
+| Llama 3.3 | 70B | General |
+| Mistral 7B | 7B | Fast |
+| DeepSeek Coder | 33B | Code |
+| Qwen 2.5 | 72B | General |
+| Gemma 4 | 9B | Fast |
+| Phi-3 | 14B | Fast |
+| CodeLlama | 34B | Code |
 
 ## Architecture
 
 ```
-User → Gateway → Router → Node (GPU) → Response
+User → API Gateway → Router → Node (GPU) → Response
               ↓
          On-chain log
          Reputation score
-         Token reward
+         Token rewards
 ```
 
-## $GBLOCK Token
+## Project Structure
 
-- **Total Supply:** 1,000,000,000
-- **Distribution:** 80% community rewards, 20% development
-- **VC Allocation:** 0%
-- **Chain:** Base L2
-
-## Tech Stack
-
-- **Models:** Llama, Mistral, Gemma, DeepSeek (all open source)
-- **Blockchain:** Base (Ethereum L2), Solana
-- **Frontend:** GitHub Pages (free)
-- **Backend:** Node.js / Python
-- **Database:** SQLite / On-chain
+```
+Gitblock/
+├── gitblock/           # Python SDK
+│   ├── __init__.py     # Package exports
+│   ├── client.py       # Main API client
+│   ├── models.py       # Data models
+│   ├── streaming.py    # SSE stream parser
+│   ├── errors.py       # Custom exceptions
+│   └── cli/            # CLI tool
+│       ├── main.py     # Entry point
+│       ├── chat.py     # Interactive REPL
+│       └── utils.py    # Helpers & config
+├── node/               # Node server software
+│   ├── server.py       # FastAPI server
+│   ├── router.py       # Smart routing
+│   ├── reputation.py   # Reputation scoring
+│   ├── rewards.py      # Token rewards
+│   └── config.py       # Configuration
+├── index.html          # Landing page
+├── pyproject.toml      # Package config
+└── requirements.txt    # Dependencies
+```
 
 ## Contributing
-
-This is an open source project. Contributions welcome.
 
 1. Fork the repo
 2. Create a feature branch
 3. Submit a PR
-4. Earn $GBLOCK tokens for merged contributions
 
 ## License
 
@@ -86,7 +157,6 @@ MIT — Free for everyone, forever.
 
 ## Links
 
-- [Website](https://askexort.github.io/gitblock)
-- [GitHub](https://github.com/askexort/gitblock)
-- [Telegram](https://t.me/gitblock)
-- [Twitter](https://twitter.com/gitblockai)
+- 🌐 [Website](https://gitblock.org)
+- 🐙 [GitHub](https://github.com/Gitblock17/Gitblock)
+- 🐦 [Twitter/X](https://x.com/gitblock_)

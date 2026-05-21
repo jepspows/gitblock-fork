@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "gitblock"
+version = "0.1.0"
+description = "Free AI inference SDK — OpenAI-compatible, decentralized, community-powered"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+authors = [{name = "GitBlock Team"}]
+keywords = ["ai", "inference", "llm", "openai-compatible", "decentralized"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "requests>=2.28.0",
+    "rich>=13.0.0",
+]
+
+[project.optional-dependencies]
+node = [
+    "fastapi>=0.104.0",
+    "uvicorn>=0.24.0",
+    "pydantic>=2.0.0",
+]
+
+[project.scripts]
+gitblock = "gitblock.cli.main:main"
+gitblock-node = "node.server:main"
+
+[project.urls]
+Homepage = "https://gitblock.org"
+Repository = "https://github.com/Gitblock17/Gitblock"
+Issues = "https://github.com/Gitblock17/Gitblock/issues"
